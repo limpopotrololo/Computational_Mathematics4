@@ -4,7 +4,7 @@ from exp_aprox import aprox as exp
 from polyn_aprox import aprox as pol
 from drawer import *
 from output_module import *
-
+from power import power as pw
 def action(x, y, n, flag):
     fx = []
     fy = []
@@ -13,10 +13,10 @@ def action(x, y, n, flag):
     sigma = []
     delta = []
     r_pirson = []
-    functions = [ln, log, exp, (pol, 2), (pol, 3)]
+    functions = [ln, log, exp, (pol, 2), (pol, 3), pw]
     formula = []
     name = ["Линейная", "Логарифмическая", "Экспоненциальная", "Полиномиальная 2ой степени",
-            "Полиномиальная 3ей степени"]
+            "Полиномиальная 3ей степени", "Степенная"]
 
     for func in functions:
         if isinstance(func, tuple):
@@ -34,7 +34,7 @@ def action(x, y, n, flag):
         r_pirson.append(r_r_pirson)
         formula.append(r_formula)
     output = "\nВЫВОД:\n"
-    for i in range(5):
+    for i in range(6):
         output += name[i] + " аппроксимирующая функция:\n"
         output += "Исходный ряд X: \n" + " ".join(map(str, x)) + "\n"
         output += "Исходный ряд Y: \n" + " ".join(map(str, y)) + "\n"
@@ -48,6 +48,12 @@ def action(x, y, n, flag):
         plot_approximation(x, y, y_aprox[i], str(formula[i]))
         output += "--------------------------------------------------------------\n"
     max_delta = min(delta)
+    # for i in range(6):
+    #     if max_delta >= delta[i]:
+    #         max_delta = delta[i]
+    #         best_index = i
+
+
     best_index = delta.index(max_delta)
     output += "Лучшая аппроксимирующая функция - " + str(name[best_index]) + "\n"
     output += "Ее вид: " + str(formula[best_index])+"\n"

@@ -12,7 +12,7 @@ def aprox(x, y, n):
         print("Значение x должно быть больше 0")
         return None
     log_x = np.log(x)
-    log_y = np.log(y)
+    log_y = y
 
     sum_log_x = np.sum(log_x)
     sum_log_y = np.sum(log_y)
@@ -22,8 +22,9 @@ def aprox(x, y, n):
     delta = n * sum_log_x2 - sum_log_x ** 2
     a = (n * sum_log_xy - sum_log_x * sum_log_y) / delta
     b = (sum_log_x2 * sum_log_y - sum_log_x * sum_log_xy) / delta
-
-    y_aprox = np.exp(b) * x ** a
+    y_aprox = []
+    for i in range(n):
+        y_aprox.append(log_f(x[i],a,b))
     eps = []
     sigma = 0
     for i in range(n):
